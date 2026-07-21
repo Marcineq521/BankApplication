@@ -36,6 +36,9 @@ public class Transaction {
     @JoinColumn(name = "account_id",nullable = false)
     private Account account;
 
+    @Column(name="counterparty_account_number",length = 28)
+    private String counterpartyAccountNumber;
+
     @PrePersist
     public void prePersist() {
         transactionDate = LocalDateTime.now();

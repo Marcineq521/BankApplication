@@ -18,4 +18,5 @@ public class TransactionResponse {
     private String description;
     private LocalDateTime transactionDate;
     private String accountNumber;
+    private String counterpartyAccountNumber;
 }
