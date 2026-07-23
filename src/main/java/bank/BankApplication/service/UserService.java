@@ -3,8 +3,10 @@ package bank.BankApplication.service;
 import bank.BankApplication.dto.request.CreateUserRequest;
 import bank.BankApplication.dto.response.UserResponse;
 import bank.BankApplication.entity.User;
+import bank.BankApplication.enums.Role;
 import bank.BankApplication.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public UserResponse createUser(CreateUserRequest request){
 
@@ -30,7 +33,8 @@ public class UserService {
         user.setSurname(request.getSurname());
         user.setPesel(request.getPesel());
         user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole(Role.USER);
 
         User savedUser=userRepository.save(user);
 

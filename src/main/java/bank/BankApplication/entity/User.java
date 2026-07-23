@@ -1,5 +1,6 @@
 package bank.BankApplication.entity;
 
+import bank.BankApplication.enums.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,6 +41,10 @@ public class User {
 
     @OneToMany(mappedBy = "owner")
     private List<Account> accounts=new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 
     @PrePersist
     public void prePersist(){
